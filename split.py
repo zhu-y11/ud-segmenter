@@ -1,7 +1,12 @@
 from random import randint
 
+
 def get_init_split(s):
-    return [0,len(s)]
+  """
+  the whole split
+  """
+  return [0, len(s)]
+
 
 def divide(split):
     assert(len(split) > 1)
@@ -37,23 +42,26 @@ def move(split):
             split[r] += 1
     return split
 
-def sample_next(split,max_splits):
-    r = randint(0,2)
 
-    if r == 0 and len(split) - 1 < max_splits:
-        split = divide(split)
-    elif r == 1:
-        if (len(split) > 2):
-            split = join(split)
-    else:
-        if (len(split) > 2):
-            split = move(split)
-    return split
+def sample_next(split, max_splits):
+  r = randint(0, 2)
 
-def sample_nth(n,split,max_splits):
-    for i in range(n):
-        split = sample_next(split,max_splits)
-    return split
+  if r == 0 and len(split) - 1 < max_splits:
+    split = divide(split)
+  elif r == 1:
+    if (len(split) > 2):
+      split = join(split)
+  else:
+    if (len(split) > 2):
+      split = move(split)
+  return split
+
+
+def sample_nth(n, split, max_splits):
+  for i in range(n):
+    split = sample_next(split, max_splits)
+  return split
+
 
 def get_str(i,split,wf):
 #    assert(i < len(split) - 1)
